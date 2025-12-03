@@ -4,6 +4,13 @@
   <meta charset="utf-8" />
   <title>EV Charging Stations Map</title>
 
+  <!-- ADD YOUR MAIN CSS (this applies the navbar + page styles) -->
+  <link rel="stylesheet" href="css/main.css">
+
+  <!-- Font-->
+  <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
   <!-- Leaflet CSS -->
   <link
     rel="stylesheet"
@@ -17,19 +24,31 @@
 
   <style>
     #map {
-      height: 600px;
+      height: 950px;
       width: 100%;
     }
   </style>
 </head>
 
 <body>
+
+  <!-- Navigation bar -->
+  <div class="topnav" id="myTopnav">
+    <a href="home.html">Homepage</a>
+    <a class="active" href="index.html">Public EV Charging Stations</a>
+    <a href="index2.html">EV Charging Station Finder</a>
+
+    <a href="javascript:void(0);" class="icon">
+        <i class="fa fa-bars"></i>
+    </a>
+  </div>
+
   <h2>Public EV Charging Stations</h2>
   <div id="map"></div>
 
   <script>
     // Initialize map centered on Washington State
-    const map = L.map('map').setView([47.5, -120.5], 7);
+    const map = L.map('map').setView([47.5, -120.5], 7.5);
 
     // Add basemap
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -37,7 +56,7 @@
       attribution: "OpenStreetMap"
     }).addTo(map);
 
-    // Load GeoJSON from assets folder
+    // Load GeoJSON
     fetch("assets/Public_EV_Charging_Stations.geojson")
       .then(response => response.json())
       .then(data => {
@@ -52,7 +71,6 @@
               fillOpacity: 0.8
             });
           },
-
           onEachFeature: (feature, layer) => {
             layer.bindPopup(
               `<strong>${feature.properties.Station_Name || "EV Station"}</strong><br>

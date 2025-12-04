@@ -2,25 +2,52 @@
     <html>
         <head>
             <meta charset="utf-8">
-            <title>Create a heatmap layer</title>
-            <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no">
+            <meta name = "viewport" content = "width=device-width,initial-scale=1"/>
+            <title>Electric-Vehicle Charging Station Density</title>
+            <!-- <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no"> -->
+            
+            <!-- Our Main CSS-->
+            <link rel="stylesheet" href="css/main.css"> 
+
+            <!-- Mapbox CSS and JS -->
             <link href="https://api.mapbox.com/mapbox-gl-js/v3.17.0-beta.1/mapbox-gl.css" rel="stylesheet">
             <script src="https://api.mapbox.com/mapbox-gl-js/v3.17.0-beta.1/mapbox-gl.js"></script>
+            
             <style>
-                body { margin: 0; padding: 0; }
-                #map { position: absolute; top: 0; bottom: 0; width: 100%; }
+                #map { 
+                    margin-top: 20px;
+                    height: 600px;
+                    width: 100%; 
+                }
+                
+                .topnav { 
+                    z-index: 1500; 
+                                      
+                }
             </style>
         </head>
         
         <body>
+            <!-- Navigation bar -->
+            <div class="topnav" id="myTopnav">
+                <a href="home.html">Homepage</a>
+                <a href="index.html">Public EV Charging Stations</a>
+                <a href="index2.html">EV Charging Station Finder</a>
+                
+                <a class="active" href="explore.html">EV Charging Station Density</a>
+                
+                <a href="javascript:void(0);" class="icon">
+                    <i class="fa fa-bars"></i>
+                </a>
+            </div>
+
+            <h2>EV Charging Station Density</h2>
+
             <div id="map"></div>
             <script>
-                //mapboxgl.accessToken = 'pk.eyJ1Ijoiam9oYW5ucjIiLCJhIjoiY21obDBicm84MTN6MzJxb3EyaTk2MzcyOCJ9.QQ-NbzYXscnvoU23EgUcyw';
                 mapboxgl.accessToken = 'pk.eyJ1Ijoiam9oYW5ucjIiLCJhIjoiY21obDBicm84MTN6MzJxb3EyaTk2MzcyOCJ9.QQ-NbzYXscnvoU23EgUcyw';
                 const map = new mapboxgl.Map({
                     container: 'map',
-                    // Choose from Mapbox's core styles, or make your own style with Mapbox Studio
-                    //style: 'mapbox://styles/mapbox/standard',
                     style: 'mapbox://styles/johannr2/cmip03uix00n201r96oa0c6ba',
                     config: {
                         basemap: {
@@ -38,14 +65,7 @@
                 map.on('load', () => {
                     // from index2, tried adding the faded-out portion around WA, didn't work
                     //map.fitBounds([[WA_BBOX[0], WA_BBOX[1]], [WA_BBOX[2], WA_BBOX[3]]], { padding: 40 });
-                    
-                    // Add a geojson point source.
-                    // Heatmap layers also work with a vector tile source.
-                    
-                    /*map.addSource('earthquakes', {
-                        'type': 'geojson',
-                        'data': 'https://docs.mapbox.com/mapbox-gl-js/assets/earthquakes.geojson'
-                    });*/
+
                     map.addSource('EVstations', {
                         'type': 'geojson',
                         'data': 'assets/Public_EV_Charging_Stations.geojson'

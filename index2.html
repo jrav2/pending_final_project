@@ -21,15 +21,17 @@
     /* Map sizing */
     #map {
         width: 100%;
-        height: 700px; /* same height as Leaflet page */
-        margin-top: 20px; /* leaves space for navbar */
+        /*height: 600px;*/ /* same height as Leaflet page */
+        height: 525px;/*Changed so map doesn't bleed past page*/
+        /*margin-top: 20px;*/
+             /* leaves space for navbar */
     }
 
     /* Optional: top controls for search/input */
     .topbar {
         position: absolute;
-        top: 130px;
-        right: 16px;  /* move it to the right */
+        top: 115px;
+        right: 10px;  /* move it to the right */
         display: flex;
         gap: 8px;
         align-items: center;
@@ -85,6 +87,7 @@
     <a href="home.html">Homepage</a>
     <a href="index.html">Public EV Charging Stations</a>
     <a class="active" href="index2.html">EV Charging Station Finder</a>
+    <a href="explore.html">EV Charging Station Density</a>
     <a href="javascript:void(0);" class="icon">
         <i class="fa fa-bars"></i>
     </a>

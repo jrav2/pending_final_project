@@ -204,9 +204,11 @@
             const feature = item.feature;
             const distance = item.distance;
             const props = feature.properties || {};
-            const name = props.Station_Na || props.StationName || props.name || 'Unnamed Station';
-            const addr = props.Address || props.address || '';
-            const city = props.City || props.CityName || '';
+            const name = props.Station_Na || 'N/A';
+            const addr = props.Address || 'N/A';
+            const city = props.City || 'N/A';
+            const phone = props.Phone_Numb || 'N/A';
+            const hours = (props.Access_Hou && props.Access_Hou.trim()) || 'N/A';
 
             const listing = document.createElement('div');
             listing.className = 'store-item';
@@ -214,6 +216,8 @@
             listing.innerHTML = `
                 <h4 class="store-name">#${rank + 1} ${escapeHtml(name)}</h4>
                 <div class="store-details">${escapeHtml(addr)} ${escapeHtml(city)}</div>
+                <div style="font-size:12px;color:#666;margin-top:4px">Phone: ${escapeHtml(phone)}</div>
+                <div style="font-size:12px;color:#666;margin-bottom:8px">Hours: ${escapeHtml(hours)}</div>
                 <div style="font-size:12px;color:#2563eb;font-weight:600;margin-top:4px">${distance.toFixed(2)} mi away</div>
             `;
 
@@ -270,8 +274,11 @@
 
         // Show info
         const info = document.getElementById('info');
-        const name = nearest.properties && (nearest.properties.Station_Na || nearest.properties.StationName || 'Unnamed');
-        info.innerHTML = `Closest station: <strong>${name}</strong> — <strong>${distance.toFixed(2)} miles</strong>`;
+        const name = nearest.properties && (nearest.properties.Station_Na || 'N/A');
+        const phone = nearest.properties && (nearest.properties.Phone_Numb || 'N/A');
+        const hours = nearest.properties && (nearest.properties.Access_Hou && nearest.properties.Access_Hou.trim() || 'N/A');
+        info.innerHTML = `Closest station: <strong>${name}</strong> — <strong>${distance.toFixed(2)} miles</strong>
+        <br/>Phone Number: ${phone} <br/> Hours: ${hours}`; 
         info.style.display = 'block';
 
         // Update sidebar with top 5 closest stations
